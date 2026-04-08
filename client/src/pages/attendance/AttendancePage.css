@@ -1,0 +1,115 @@
+.attendance-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #f3f4f6;
+  margin: 0;
+}
+
+.filter-group {
+  display: flex;
+  gap: 12px;
+}
+
+.filter-group select {
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #e0e0e0;
+  outline: none;
+  cursor: pointer;
+}
+
+.table-container {
+  background: rgba(26, 29, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.data-table th {
+  background: rgba(255, 255, 255, 0.02);
+  font-weight: 500;
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.data-table td {
+  font-size: 14px;
+  color: #d1d5db;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-normal { background: rgba(16, 185, 129, 0.1); color: #34d399; }
+.status-warning { background: rgba(245, 158, 11, 0.1); color: #fbbf24; }
+.status-danger { background: rgba(239, 68, 68, 0.1); color: #f87171; }
+.status-info { background: rgba(59, 130, 246, 0.1); color: #60a5fa; }
+.status-default { background: rgba(156, 163, 175, 0.1); color: #9ca3af; }
+
+.empty-state {
+  text-align: center !important;
+  color: #6b7280 !important;
+  padding: 40px !important;
+}
+
+.loading-state {
+  text-align: center;
+  padding: 40px;
+  color: #9ca3af;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: #e0e0e0;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 14px;
+  color: #9ca3af;
+}

@@ -1,0 +1,129 @@
+.leave-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.btn-primary {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.card {
+  background: rgba(26, 29, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #f3f4f6;
+}
+
+.standard-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.alert-error {
+  background: rgba(239, 68, 68, 0.1);
+  color: #fca5a5;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.balances-section h3 {
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: #d1d5db;
+}
+
+.balances-grid {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.balance-card {
+  min-width: 200px;
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.1), rgba(0,0,0,0));
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.balance-card h4 {
+  margin: 0 0 12px 0;
+  color: #a5b4fc;
+}
+
+.balance-stats {
+  font-size: 13px;
+  color: #9ca3af;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.balance-stats span {
+  font-weight: bold;
+  color: #f3f4f6;
+}
+
+.balance-stats .available {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(255,255,255,0.1);
+  color: #34d399;
+}
+
+.balance-stats .available span {
+  color: #6ee7b7;
+  font-size: 16px;
+}
+
+.no-balances {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-danger {
+  color: #ef4444;
+}
+
+.btn-danger:hover {
+  text-decoration: underline;
+}

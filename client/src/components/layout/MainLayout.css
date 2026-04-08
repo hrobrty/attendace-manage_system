@@ -1,0 +1,197 @@
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #0f1117;
+  color: #e0e0e0;
+}
+
+/* ==================== 侧边栏 ==================== */
+.sidebar {
+  width: 240px;
+  background: linear-gradient(180deg, #1a1d2e 0%, #151827 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.collapsed .sidebar {
+  width: 64px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sidebar-logo {
+  font-size: 28px;
+  margin: 0;
+}
+
+.sidebar-title {
+  font-size: 16px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-item:hover {
+  background: rgba(99, 102, 241, 0.1);
+  color: #c7d2fe;
+}
+
+.nav-item.active {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.15));
+  color: #a5b4fc;
+  font-weight: 600;
+}
+
+.nav-icon {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.nav-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 8px 12px;
+}
+
+.sidebar-toggle {
+  padding: 12px;
+  background: none;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 12px;
+  transition: color 0.2s;
+}
+
+.sidebar-toggle:hover {
+  color: #a5b4fc;
+}
+
+/* ==================== 主内容区 ==================== */
+.main-content {
+  flex: 1;
+  margin-left: 240px;
+  transition: margin-left 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.collapsed .main-content {
+  margin-left: 64px;
+}
+
+/* ==================== 顶部栏 ==================== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background: rgba(26, 29, 46, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-role {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+  color: #a5b4fc;
+  font-weight: 600;
+}
+
+.user-name {
+  font-size: 14px;
+  color: #d1d5db;
+}
+
+.btn-logout {
+  padding: 6px 14px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 6px;
+  background: none;
+  color: #ef4444;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-logout:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: #ef4444;
+}
+
+/* ==================== 页面内容 ==================== */
+.page-content {
+  flex: 1;
+  padding: 24px;
+}
+
+/* ==================== 响应式 ==================== */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 64px;
+  }
+  .main-content {
+    margin-left: 64px;
+  }
+  .sidebar-title,
+  .nav-item span:not(.nav-icon) {
+    display: none;
+  }
+}

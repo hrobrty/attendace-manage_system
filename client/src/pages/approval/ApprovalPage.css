@@ -1,0 +1,176 @@
+.approval-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pending-count {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.approval-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.approval-card {
+  background: rgba(26, 29, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  transition: border-color 0.2s;
+}
+
+.approval-card:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.approval-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.applicant-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.type-badge {
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.15));
+  color: #a5b4fc;
+}
+
+.applicant-name {
+  font-weight: 600;
+  color: #f3f4f6;
+  font-size: 15px;
+}
+
+.dept {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.flow-level {
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.request-detail {
+  display: flex;
+  gap: 16px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  font-size: 14px;
+  color: #d1d5db;
+  margin-bottom: 16px;
+}
+
+.detail-tag {
+  color: #a5b4fc;
+  font-weight: 500;
+}
+
+.comment-input {
+  margin-bottom: 12px;
+}
+
+.comment-input textarea {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #e0e0e0;
+  resize: none;
+  outline: none;
+}
+
+.comment-input textarea:focus {
+  border-color: #6366f1;
+}
+
+.approval-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-comment {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn-comment:hover {
+  color: #d1d5db;
+}
+
+.action-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-reject {
+  padding: 8px 20px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: none;
+  border-radius: 8px;
+  color: #ef4444;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-reject:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.btn-approve {
+  padding: 8px 20px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn-approve:hover {
+  opacity: 0.9;
+}
+
+.btn-approve:disabled,
+.btn-reject:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.empty-approval {
+  text-align: center;
+  padding: 60px 0;
+  color: #6b7280;
+}
+
+.empty-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 16px;
+}

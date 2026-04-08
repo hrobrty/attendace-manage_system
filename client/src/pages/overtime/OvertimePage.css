@@ -1,0 +1,49 @@
+.overtime-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.overtime-summary {
+  display: flex;
+  gap: 16px;
+}
+
+.summary-card {
+  flex: 1;
+  background: rgba(26, 29, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.summary-label {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.summary-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #f3f4f6;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.summary-value span {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+.summary-value.warning {
+  color: #fbbf24;
+}
+
+.summary-value.success {
+  color: #34d399;
+}

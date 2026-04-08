@@ -1,0 +1,113 @@
+.dashboard-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+}
+
+.clock-section {
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+}
+
+.clock-display {
+  margin-bottom: 24px;
+}
+
+.clock-time {
+  display: block;
+  font-size: 64px;
+  font-weight: 200;
+  color: #f3f4f6;
+  letter-spacing: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.clock-date {
+  display: block;
+  font-size: 16px;
+  color: #9ca3af;
+  margin-top: 8px;
+}
+
+.greeting h2 {
+  font-size: 22px;
+  font-weight: 500;
+  color: #d1d5db;
+  margin: 0 0 24px;
+}
+
+.clock-message {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.clock-message.success {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #6ee7b7;
+}
+
+.clock-message.error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+.clock-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.btn-clock {
+  padding: 20px 36px;
+  border: none;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 180px;
+}
+
+.btn-clock:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn-clock-in {
+  background: linear-gradient(135deg, #6366f1, #818cf8);
+  color: white;
+}
+
+.btn-clock-in:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
+}
+
+.btn-clock-out {
+  background: linear-gradient(135deg, #a855f7, #c084fc);
+  color: white;
+}
+
+.btn-clock-out:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(168, 85, 247, 0.4);
+}
+
+.today-status {
+  font-size: 15px;
+  color: #9ca3af;
+}
+
+.status-badge {
+  font-weight: 600;
+  margin-left: 4px;
+}

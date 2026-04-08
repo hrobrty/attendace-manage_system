@@ -1,0 +1,38 @@
+schema: spec-driven
+
+# Project context
+# This is shown to AI when creating artifacts.
+context: |
+  Project: Attendance Management System (出勤管理系统) - An enterprise-level HR tool.
+  
+  Tech Stack:
+    - Backend: Node.js (Express) + Sequelize (PostgreSQL/Supabase).
+    - Frontend: React 18 + TypeScript + Vite.
+    - Database: Cloud-hosted on Supabase using Session Pooler (IPv4 compatible).
+    - Auth: JWT based with Access/Refresh tokens and HttpOnly cookies.
+    - Styling: Vanilla CSS (strictly NO CSS frameworks unless asked), focusing on Premium Aesthetics.
+  
+  Design Conventions & Philosophy:
+    - UI Style: Modern, Sleek, Dark Mode optimized, Glassmorphism, smooth animations.
+    - Branding: Vibrant gradients, tailored HSL colors, high-contrast text.
+    - Responsive: Desktop-first but mobile-compatible layouts.
+    - Icons: Lucide React or similar minimal svg icons.
+
+  Coding & Database Conventions:
+    - Structure: Monorepo-style with `server/` and `client/` directories.
+    - DB Naming: Use `underscored: true` (snake_case in DB, camelCase in code).
+    - API: All routes prefixed with `/api`, protected by `auth` middleware.
+    - Language: Primary language for UI and comments is Simplified Chinese (简体中文).
+    - Error Handling: Global middleware on backend, Toast notifications on frontend.
+
+# Per-artifact rules
+rules:
+  proposal:
+    - Always consider UI aesthetics in the design section.
+    - Use Simplified Chinese for descriptions.
+  design:
+    - Must include CSS architecture plan if layout changes are significant.
+    - Prioritize interactive elements and hover states.
+  tasks:
+    - Ensure logical separation between server and client tasks.
+    - Include verification steps (manual/unit tests) for each feature.
