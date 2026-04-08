@@ -175,7 +175,13 @@ cd client && npm run build
     *   `DATABASE_URL`: 直接引用刚才创建的 PostgreSQL 的连接字符串（Railway 内部会自动注入 `PGHOST`, `PGUSER` 等，或者你直接填 `DB_HOST=${{Postgres.PGHOST}}` 等）。
     *   `JWT_ACCESS_SECRET`: 生产环境必需的随机强密钥。
     *   `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`: 邮箱推送信息（参考上文 Gmail 教程）。
-4.  **初始化数据库**：
+    *   `INITIAL_ADMIN_EMAIL`, `INITIAL_ADMIN_PASSWORD`: 初始管理员账号密码（可选，默认 `admin@attendance.local` / `admin123`）。
+    *   `CLIENT_URL`: 填入你即将生成的 Vercel 前端地址（用于跨域许可）。
+4.  **生成公网域名** (关键)：
+    *   在 Railway 该服务的 `Settings` -> `Networking` 中，点击 **Generate Domain**。
+    *   你将获得一个类似 `https://xxx.up.railway.app` 的地址。
+    *   **后端 API 最终地址** 即为：`https://你的地址.up.railway.app/api`。
+5.  **初始化数据库**：
     *   部署成功后，在 Railway 的终端执行一次 `npx sequelize-cli db:migrate` 和 `npx sequelize-cli db:seed:all` 来初始化正式环境的数据表和默认管理员。
 
 ### 2. 前端部署 (Vercel)
@@ -198,3 +204,14 @@ cd client && npm run build
 *   [ ] 数据库已完成初始 Seed（可通过 `npm run db:seed` 或在生产环境中手动触发一次）。
 *   [ ] 生产环境的数据库开启了 SSL。
 *   [ ] 设置了强密码的 `JWT_ACCESS_SECRET`。
+
+### 初始登入信息
+部署完成后，你可以使用系统预设的管理员账号登入（需先运行过数据库 Seed 命令）：
+
+| 项目 | 默认值 |
+|------|--------|
+| **Email** | `admin@attendance.local` |
+| **密码** | `admin123` |
+
+> [!CAUTION]
+> 登录后请务必在“个人设置”或“用户管理”中修改管理员默认密码并在生产环境中删除种子数据。

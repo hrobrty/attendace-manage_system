@@ -7,18 +7,21 @@ const { hashPassword } = require('./utils/password');
  */
 const seedDatabase = async () => {
   // ==================== 默认管理员 ====================
-  const adminExists = await User.findOne({ where: { email: 'admin@attendance.local' } });
+  const adminEmail = process.env.INITIAL_ADMIN_EMAIL || 'admin@attendance.local';
+  const adminPassword = process.env.INITIAL_ADMIN_PASSWORD || 'admin123';
+
+  const adminExists = await User.findOne({ where: { email: adminEmail } });
   if (!adminExists) {
-    const hashedPw = await hashPassword('admin123');
+    const hashedPw = await hashPassword(adminPassword);
     await User.create({
       name: '系统管理员',
-      email: 'admin@attendance.local',
+      email: adminEmail,
       password: hashedPw,
       role: 'admin',
       status: 'active',
       mustChangePassword: false, // NOTE: 预设管理员不强制改密码
     });
-    console.log('[Seed] 创建默认管理员: admin@attendance.local / admin123');
+    console.log(`[Seed] 创建默认管理员: ${adminEmail} / ${adminPassword}`);
   }
 
   // ==================== 内建假别 ====================
