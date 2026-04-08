@@ -26,42 +26,115 @@ body {
   min-height: 100vh;
 }
 
-/* ==================== 全局工具类 ==================== */
-.loading-screen {
-  display: flex;
+/* ==================== 统一表单样式 ==================== */
+.btn-primary {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.btn-primary:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #d1d5db;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.card {
+  background: rgba(26, 29, 46, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.card h2, .card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
   font-size: 18px;
+  color: #f3f4f6;
+}
+
+.standard-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 500;
   color: #9ca3af;
 }
 
-.page-placeholder {
+.form-row {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 300px;
-  font-size: 20px;
-  color: #6b7280;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px dashed rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  gap: 16px;
+  align-items: flex-start; /* 统一从顶部开始对齐标签 */
 }
 
-/* ==================== 滚动条 ==================== */
-::-webkit-scrollbar {
-  width: 6px;
+.form-row .form-group {
+  flex: 1;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
+/* 统一输入框最小高度，确保与 Radio Group 对齐 */
+input[type="date"],
+input[type="time"],
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+  min-height: 42px;
 }
 
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
+.alert-error {
+  background: rgba(239, 68, 68, 0.1);
+  color: #fca5a5;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+.alert-success {
+  background: rgba(16, 185, 129, 0.1);
+  color: #6ee7b7;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
 }

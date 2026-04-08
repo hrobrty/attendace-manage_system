@@ -63,7 +63,7 @@ const start = async () => {
 
     // NOTE: 开发环境自动同步表结构（生产环境应使用 migration）
     if (process.env.NODE_ENV !== 'production') {
-      await sequelize.sync({ force: true });
+      await sequelize.sync({ alter: false });
       console.log('[DB] 表结构同步完成');
 
       // 初始化种子数据

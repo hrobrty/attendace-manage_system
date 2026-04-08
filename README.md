@@ -158,3 +158,43 @@ cd client && npm run build
 | 签核 | 签核层级数 |
 | 代理人 | 必填/确认/审批权限 |
 | 通知 | Email 通知开关 |
+
+## 部署 (Deployment)
+
+建议采用前后端分离部署方案：**后端 (API)** 部署在支持 Node.js 的平台（如 Railway, Render, Fly.io），**前端 (UI)** 部署在 Vercel。
+
+### 1. 后端部署 (API Server)
+推荐平台：[Railway](https://railway.app/) (操作最简便)
+
+1.  **创建数据库**：在 Railway 控制面板点击 `New` -> `Database` -> `Add PostgreSQL`。
+2.  **导入后端代码**：
+    *   点击 `New` -> `GitHub Repo` -> 选择本仓库。
+    *   在设置中将 **Root Directory** 设为 `server`。
+3.  **配置环境变量 (Variables)**：复制以下项并填入 Railway 的 Variables 页面：
+    *   `PORT`: `5000` (Railway 会自动分配，但建议手动指定一个)
+    *   `DATABASE_URL`: 直接引用刚才创建的 PostgreSQL 的连接字符串（Railway 内部会自动注入 `PGHOST`, `PGUSER` 等，或者你直接填 `DB_HOST=${{Postgres.PGHOST}}` 等）。
+    *   `JWT_ACCESS_SECRET`: 生产环境必需的随机强密钥。
+    *   `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`: 邮箱推送信息（参考上文 Gmail 教程）。
+4.  **初始化数据库**：
+    *   部署成功后，在 Railway 的终端执行一次 `npx sequelize-cli db:migrate` 和 `npx sequelize-cli db:seed:all` 来初始化正式环境的数据表和默认管理员。
+
+### 2. 前端部署 (Vercel)
+
+项目前端通过 Vercel 部署非常简单：
+
+1.  **登录 Vercel**：关联你的 GitHub 账号。
+2.  **导入项目**：点击 `Add New` -> `Project`，选择该仓库。
+3.  **配置项目参数**：
+    *   **Root Directory**: 设为 `client` (关键)。
+    *   **Framework Preset**: 选择 `Vite`。
+    *   **Build Command**: `npm run build`。
+    *   **Output Directory**: `dist`。
+4.  **配置环境变量 (Environment Variables)**：
+    *   添加 `VITE_API_URL`: 填写你**已部署好的后端 API 地址** (例如 `https://your-api.railway.app/api`)。
+5.  **点击 Deploy**：等待构建完成即可获得公网访问链接。
+
+### 3. 生产环境 CheckList
+*   [ ] 所有的 `localhost` 引用都已改为生产域名。
+*   [ ] 数据库已完成初始 Seed（可通过 `npm run db:seed` 或在生产环境中手动触发一次）。
+*   [ ] 生产环境的数据库开启了 SSL。
+*   [ ] 设置了强密码的 `JWT_ACCESS_SECRET`。

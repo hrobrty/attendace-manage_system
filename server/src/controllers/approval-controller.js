@@ -1,4 +1,4 @@
-const { ApprovalFlow, ApprovalStep, LeaveRequest, OvertimeRequest, LeaveBalance, LeaveType, User, sequelize } = require('../models');
+const { ApprovalFlow, ApprovalStep, LeaveRequest, OvertimeRequest, ClockAmendment, Attendance, LeaveBalance, LeaveType, User, sequelize } = require('../models');
 const approvalService = require('../services/approval-service');
 const emailService = require('../services/email-service');
 const settingsService = require('../services/settings-service');
@@ -28,6 +28,10 @@ const getPending = async (req, res) => {
       });
     } else if (flow.requestType === 'overtime') {
       requestDetail = await OvertimeRequest.findByPk(flow.requestId, {
+        include: [{ model: User, attributes: ['id', 'name', 'department'] }],
+      });
+    } else if (flow.requestType === 'clock_amendment') {
+      requestDetail = await ClockAmendment.findByPk(flow.requestId, {
         include: [{ model: User, attributes: ['id', 'name', 'department'] }],
       });
     }
@@ -173,6 +177,33 @@ const handleApprovalComplete = async (flow, result, rejectReason = '') => {
       if (applicant) {
         emailService.sendApprovalResult(
           applicant.email, applicant.name, '加班', result, rejectReason
+        ).catch((err) => console.error('[approval] 通知申请人失败:', err));
+      }
+    }
+  }
+
+  if (flow.requestType === 'clock_amendment') {
+    const amendment = await ClockAmendment.findByPk(flow.requestId);
+    if (!amendment) return;
+
+    await amendment.update({ status: isApproved ? 'approved' : 'rejected' });
+
+    if (isApproved) {
+      // 成功通过人工审批，同步到考勤表
+      const [attendance] = await Attendance.findOrCreate({
+        where: { userId: amendment.userId, date: amendment.date },
+        defaults: { userId: amendment.userId, date: amendment.date, status: 'normal' }
+      });
+
+      const updateField = amendment.clockType === 'clock_in' ? 'clockIn' : 'clockOut';
+      await attendance.update({ [updateField]: amendment.amendedTime });
+    }
+
+    if (settingsService.getBool('email_on_approval', true)) {
+      const applicant = await User.findByPk(amendment.userId);
+      if (applicant) {
+        emailService.sendApprovalResult(
+          applicant.email, applicant.name, '补打卡', result, rejectReason
         ).catch((err) => console.error('[approval] 通知申请人失败:', err));
       }
     }

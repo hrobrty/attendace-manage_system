@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import type { Attendance, PaginatedResponse } from '../../types';
 import './AttendancePage.css';
@@ -35,6 +36,8 @@ export default function AttendancePage() {
     late: { label: '迟到', className: 'status-warning' },
     early: { label: '早退', className: 'status-warning' },
     late_early: { label: '迟到且早退', className: 'status-danger' },
+    missing_clock_in: { label: '缺上班卡', className: 'status-danger' },
+    missing_clock_out: { label: '缺下班卡', className: 'status-danger' },
     absent: { label: '旷职', className: 'status-danger' },
     leave: { label: '请假', className: 'status-info' },
   };
@@ -74,6 +77,7 @@ export default function AttendancePage() {
                 <th>下班时间</th>
                 <th>状态</th>
                 <th>备注</th>
+                <th>操作</th>
               </tr>
             </thead>
             <tbody>
@@ -89,6 +93,13 @@ export default function AttendancePage() {
                       </span>
                     </td>
                     <td className="note-cell">{record.note || '-'}</td>
+                    <td>
+                      {record.status !== 'normal' && record.status !== 'leave' && (
+                        <Link to={`/attendance/amendments?date=${record.date}`} className="btn-table-amend">
+                          补勤
+                        </Link>
+                      )}
+                    </td>
                   </tr>
                 ))
               ) : (

@@ -43,7 +43,6 @@ const LeaveType = sequelize.define('LeaveType', {
     allowNull: false,
     defaultValue: 'all',
     field: 'gender_specific',
-    comment: '适用性别',
   },
   isSystem: {
     type: DataTypes.BOOLEAN,

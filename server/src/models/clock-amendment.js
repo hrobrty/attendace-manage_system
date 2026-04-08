@@ -21,7 +21,6 @@ const ClockAmendment = sequelize.define('ClockAmendment', {
     type: DataTypes.ENUM('clock_in', 'clock_out'),
     allowNull: false,
     field: 'clock_type',
-    comment: '补打卡类型',
   },
   amendedTime: {
     type: DataTypes.DATE,

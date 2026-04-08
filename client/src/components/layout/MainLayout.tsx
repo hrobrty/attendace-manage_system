@@ -31,9 +31,13 @@ export default function MainLayout() {
             <span className="nav-icon">🏠</span>
             {!sidebarCollapsed && <span>打卡首页</span>}
           </NavLink>
-          <NavLink to="/attendance" className="nav-item">
+          <NavLink to="/attendance" end className="nav-item">
             <span className="nav-icon">📋</span>
             {!sidebarCollapsed && <span>打卡记录</span>}
+          </NavLink>
+          <NavLink to="/attendance/amendments" className="nav-item">
+            <span className="nav-icon">📝</span>
+            {!sidebarCollapsed && <span>补打卡申请</span>}
           </NavLink>
           <NavLink to="/leave" className="nav-item">
             <span className="nav-icon">🏖️</span>

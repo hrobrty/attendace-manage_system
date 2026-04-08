@@ -111,3 +111,31 @@
   font-weight: 600;
   margin-left: 4px;
 }
+
+.anomaly-check {
+  margin-top: 32px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 14px;
+}
+
+.help-text {
+  color: #6b7280;
+}
+
+.amend-link {
+  color: #818cf8;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 8px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.amend-link:hover {
+  background: rgba(129, 140, 248, 0.1);
+  color: #a5b4fc;
+}

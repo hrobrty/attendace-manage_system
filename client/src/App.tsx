@@ -11,6 +11,7 @@ import ChangePasswordPage from './pages/auth/ChangePasswordPage';
 // 员工页面
 import DashboardPage from './pages/dashboard/DashboardPage';
 import AttendancePage from './pages/attendance/AttendancePage';
+import AmendmentPage from './pages/attendance/AmendmentPage';
 import LeavePage from './pages/leave/LeavePage';
 import OvertimePage from './pages/overtime/OvertimePage';
 
@@ -36,6 +37,7 @@ export default function App() {
               <Route element={<MainLayout />}>
                 <Route path="/" element={<DashboardPage />} />
                 <Route path="/attendance" element={<AttendancePage />} />
+                <Route path="/attendance/amendments" element={<AmendmentPage />} />
                 <Route path="/leave" element={<LeavePage />} />
                 <Route path="/overtime" element={<OvertimePage />} />
 

@@ -113,3 +113,27 @@
   font-size: 14px;
   color: #9ca3af;
 }
+
+.btn-table-amend {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  background: rgba(129, 140, 248, 0.1);
+  color: #a5b4fc;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(129, 140, 248, 0.2);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-table-amend:hover {
+  background: #6366f1;
+  color: white;
+  border-color: #6366f1;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  transform: translateY(-1px);
+}

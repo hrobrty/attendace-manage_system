@@ -33,7 +33,6 @@ const Attendance = sequelize.define('Attendance', {
     type: DataTypes.ENUM('normal', 'late', 'early', 'late_early', 'missing_clock_in', 'missing_clock_out', 'absent', 'leave'),
     allowNull: false,
     defaultValue: 'normal',
-    comment: '状态：正常/迟到/早退/迟到且早退/缺上班卡/缺下班卡/旷职/请假',
   },
   note: {
     type: DataTypes.STRING(255),

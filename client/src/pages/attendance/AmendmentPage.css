@@ -1,0 +1,183 @@
+.amendment-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 额度提示 */
+.quota-hint {
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #a5b4fc;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quota-hint strong {
+  font-size: 18px;
+  color: #fff;
+  margin: 0 4px;
+}
+
+/* 单选组样式 */
+.radio-group {
+  display: flex;
+  gap: 12px;
+}
+
+.radio-group label {
+  flex: 1;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 14px;
+  color: #9ca3af;
+  min-height: 42px; /* 统一高度 */
+}
+
+.radio-group label:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.radio-group label.active {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: #6366f1;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.1);
+}
+
+.radio-group input {
+  display: none;
+}
+
+/* 历史列表 */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.history-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.history-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateX(4px);
+}
+
+.item-date {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.item-type {
+  font-size: 15px;
+  font-weight: 500;
+  color: #f3f4f6;
+}
+
+.item-side {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-approved .status-badge { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+.status-pending .status-badge { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+.status-rejected .status-badge { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+
+/* 表单输入框适配 */
+input[type="date"],
+input[type="time"] {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 8px;
+  width: 100%;
+  transition: all 0.3s;
+}
+
+input[type="date"]:focus,
+input[type="time"]:focus {
+  outline: none;
+  border-color: #6366f1;
+  background: rgba(99, 102, 241, 0.05);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+/* 隐藏部分浏览器的默认行为，美化图标 */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8) sepia(100%) saturate(1000%) hue-rotate(200deg); /* 调成淡紫色/蓝色 */
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover,
+input[type="time"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* 之前缺失的 item-reason 样式补全 */
+.item-reason {
+  font-size: 12px;
+  color: #4b5563;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -74,6 +74,7 @@ const User = sequelize.define('User', {
   },
   indexes: [
     {
+      name: 'idx_user_email_unique',
       unique: true,
       fields: ['email']
     }

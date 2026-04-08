@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import { useAuth } from '../../contexts/AuthContext';
 import type { Attendance, ApiResponse } from '../../types';
@@ -108,6 +109,11 @@ export default function DashboardPage() {
           >
             {todayRecord?.clockOut ? `✅ 已下班 ${new Date(todayRecord.clockOut).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })}` : '🌙 下班打卡'}
           </button>
+        </div>
+
+        <div className="anomaly-check">
+          <span className="help-text">忘了打卡？</span>
+          <Link to="/attendance/amendments" className="amend-link">申请补打卡</Link>
         </div>
 
         {todayRecord && (

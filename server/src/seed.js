@@ -42,7 +42,10 @@ const seedDatabase = async () => {
     { key: 'flexible_hours_enabled', value: 'false', description: '弹性工时开关', category: 'attendance' },
     { key: 'flexible_start', value: '08:00', description: '弹性上班开始时间', category: 'attendance' },
     { key: 'flexible_end', value: '10:00', description: '弹性上班结束时间', category: 'attendance' },
-    { key: 'clock_amendment_enabled', value: 'false', description: '补打卡功能开关', category: 'attendance' },
+    { key: 'clock_amendment_enabled', value: 'true', description: '补打卡功能开关', category: 'attendance' },
+    { key: 'amendment_monthly_quota', value: '3', description: '每月自助补打额度 (次数)', category: 'attendance' },
+    { key: 'amendment_deadline_days', value: '3', description: '补打申请有效期 (天数)', category: 'attendance' },
+    { key: 'amendment_auto_approve_if_quota', value: 'true', description: '额度内是否自动通过', category: 'attendance' },
     // 请假
     { key: 'min_leave_unit', value: 'half_day', description: '最小请假单位 (half_day / hour)', category: 'leave' },
     { key: 'sick_leave_proof', value: 'false', description: '病假需提交证明', category: 'leave' },
