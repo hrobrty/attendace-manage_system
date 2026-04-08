@@ -161,9 +161,15 @@ cd client && npm run build
 
 ## 部署 (Deployment)
 
-建议采用前后端分离部署方案：**后端 (API)** 部署在支持 Node.js 的平台（如 Railway, Render, Fly.io），**前端 (UI)** 部署在 Vercel。
+建议采用前后端分离部署方案。如果你在海外或有自定义域名，推荐 **方案 A**；若你在国内且追求最快访问速度，推荐 **方案 B (Zeabur)**。
 
-### 1. 后端部署 (API Server)
+---
+
+### 【方案 A】国际主流部署 (Vercel + Railway/Render)
+
+适合有自定义域名或不在意冷启动的用户。
+
+#### 1. 后端部署 (API Server)
 推荐平台：[Railway](https://railway.app/) (操作最简便)
 
 1.  **创建数据库**：在 Railway 控制面板点击 `New` -> `Database` -> `Add PostgreSQL`。
@@ -204,6 +210,27 @@ cd client && npm run build
 *   [ ] 数据库已完成初始 Seed（可通过 `npm run db:seed` 或在生产环境中手动触发一次）。
 *   [ ] 生产环境的数据库开启了 SSL。
 *   [ ] 设置了强密码的 `JWT_ACCESS_SECRET`。
+
+---
+
+### 【方案 B】国内加速部署 (Zeabur 一键全栈) - 推荐国内用户
+
+Zeabur 将前端、后端、数据库集成在一起且在亚洲有节点，国内访问速度极快。
+
+1.  **新建项目**：登录 [Zeabur](https://zeabur.com/)，创建一个新项目。
+2.  **添加数据库**：在项目内 `Create Service` -> `Prebuilt` -> 选择 `PostgreSQL`。在服务的 `Instructions` 中获取 `DATABASE_URL`。
+3.  **部署后端 (server)**：
+    *   `Create Service` -> `Git` -> 选择本仓库。
+    *   在 `Settings` 中设置 **Root Directory** 为 `server`。
+    *   在 `Variables` 中填入 `DATABASE_URL` 和 `JWT_ACCESS_SECRET`。
+    *   在 `Domain` 绑定一个免费域名，并获取 API 地址。
+4.  **部署前端 (client)**：
+    *   再次 `Create Service` -> `Git` -> 选择同一个仓库。
+    *   在 `Settings` 中设置 **Root Directory** 为 `client`。
+    *   在 `Variables` 中设置 `VITE_API_URL` 为上一步的后端 API URL。
+    *   在 `Domain` 绑定域名即可访问。
+
+---
 
 ### 初始登入信息
 部署完成后，你可以使用系统预设的管理员账号登入（需先运行过数据库 Seed 命令）：
