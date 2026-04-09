@@ -68,17 +68,28 @@ const createUser = async (req, res) => {
     mustChangePassword: true,
   });
 
-  // NOTE: 发送欢迎邮件（异步，不阻塞响应）
-  emailService.sendWelcome(email, name, rawPassword).catch((err) => {
-    console.error('[createUser] 发送欢迎邮件失败:', err);
+  // NOTE: 发送欢迎邮件（完全异步，不阻塞响应；init/verify 均在后台执行）
+  setImmediate(() => {
+    emailService.sendWelcome(email, name, rawPassword).catch((err) => {
+      console.error('[createUser] 发送欢迎邮件失败:', err);
+    });
   });
 
-  // 查询完整用户信息（排除密码字段）
-  const created = await User.findByPk(user.id, {
-    include: [{ model: User, as: 'approver', attributes: ['id', 'name'] }],
-  });
+  // 直接使用 User.create() 返回的对象，避免重复查询数据库
+  // 仅在设置了 approverId 时才额外查一次 approver 基本信息
+  let approver = null;
+  if (approverId) {
+    approver = await User.findByPk(approverId, {
+      attributes: ['id', 'name'],
+    });
+  }
 
-  return response.success(res, created, '用户创建成功', 201);
+  // 将 approver 挂载到返回对象上，与 findByPk include 的结构保持一致
+  const userData = user.toJSON();
+  delete userData.password;
+  userData.approver = approver ? approver.toJSON() : null;
+
+  return response.success(res, userData, '用户创建成功', 201);
 };
 
 /**
