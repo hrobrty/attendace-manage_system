@@ -8,6 +8,7 @@ class EmailService {
   constructor() {
     this.transporter = null;
     this.initialized = false;
+    this._verifyOnce = false;
   }
 
   /**
@@ -57,17 +58,18 @@ class EmailService {
           port,
           secure: port === 465,
           auth: { user, pass },
+          connectionTimeout: 10000,
+          socketTimeout: 10000,
+          pool: true,
+          maxConnections: 5,
+          maxMessages: 100,
         });
-        console.log('[EmailService] SMTP 配置加载成功');
+        console.log('[EmailService] SMTP 配置加载成功（连接池已启用，延迟验证）');
       }
-
-      // 验证连接（可选，生产环境建议开启）
-      await this.transporter.verify();
-      console.log('[EmailService] 邮件服务连接验证成功');
 
       this.initialized = true;
     } catch (err) {
-      console.error('[EmailService] 初始化失败:', err);
+      console.error('[EmailService] 初始化失败:', err.message, err.code ? `(${err.code})` : '');
       this.initialized = false;
       throw new Error(`EmailService 初始化失败: ${err.message}`);
     }
@@ -90,6 +92,18 @@ class EmailService {
       }
       if (!this.initialized) {
         await this.init();
+      }
+
+      // 延迟验证：仅在首次发送时验证 SMTP 连接
+      if (!this._verifyOnce) {
+        try {
+          await this.transporter.verify();
+          this._verifyOnce = true;
+          console.log('[EmailService] SMTP 连接验证成功');
+        } catch (verifyErr) {
+          console.error('[EmailService] SMTP 连接验证失败:', verifyErr.message, verifyErr.code ? `(${verifyErr.code})` : '');
+          // 验证失败不阻断发送，继续尝试
+        }
       }
 
       const from = process.env.SMTP_FROM || 'noreply@attendance.local';
@@ -117,7 +131,7 @@ class EmailService {
       if (process.env.NODE_ENV !== 'production') {
         console.error('[EmailService] 发送失败:', err);
       } else {
-        console.error('[EmailService] 发送失败:', err.message);
+        console.error('[EmailService] 发送失败:', err.message, err.code ? `(${err.code})` : '');
       }
       return { success: false, error: err.message, code: err.code };
     }
