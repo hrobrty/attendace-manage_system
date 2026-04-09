@@ -8,6 +8,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const { sequelize } = require('./models');
 const settingsService = require('./services/settings-service');
+const emailQueue = require('./services/email-queue');
 const errorHandler = require('./middleware/error-handler');
 const seedDatabase = require('./seed');
 
@@ -73,9 +74,24 @@ const start = async () => {
     // 加载系统设置到缓存
     await settingsService.loadAll();
 
-    app.listen(PORT, () => {
+    // 启动邮件队列后台处理器
+    emailQueue.start();
+
+    const server = app.listen(PORT, () => {
       console.log(`[Server] 出勤管理系统后端运行于 http://localhost:${PORT}`);
     });
+
+    // 优雅退出：停止队列处理器
+    const shutdown = (signal) => {
+      console.log(`[Server] 收到 ${signal}，正在关闭...`);
+      emailQueue.stop();
+      server.close(() => {
+        console.log('[Server] HTTP 服务器已关闭');
+        process.exit(0);
+      });
+    };
+    process.once('SIGTERM', () => shutdown('SIGTERM'));
+    process.once('SIGINT', () => shutdown('SIGINT'));
   } catch (err) {
     console.error('[Server] 启动失败:', err);
     process.exit(1);
