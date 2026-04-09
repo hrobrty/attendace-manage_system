@@ -1,6 +1,6 @@
 const { User, LeaveBalance, LeaveType } = require('../models');
 const { hashPassword, generateRandomPassword } = require('../utils/password');
-const emailService = require('../services/email-service');
+const emailQueue = require('../services/email-queue');
 const response = require('../utils/response');
 const AppError = require('../utils/app-error');
 const { Op } = require('sequelize');
@@ -68,10 +68,8 @@ const createUser = async (req, res) => {
     mustChangePassword: true,
   });
 
-  // NOTE: 发送欢迎邮件（异步，不阻塞响应）
-  emailService.sendWelcome(email, name, rawPassword).catch((err) => {
-    console.error('[createUser] 发送欢迎邮件失败:', err);
-  });
+  // NOTE: 将欢迎邮件加入后台队列，立即返回，不阻塞响应
+  emailQueue.enqueue('welcome', { email, name, password: rawPassword });
 
   // 查询完整用户信息（排除密码字段）
   const created = await User.findByPk(user.id, {
